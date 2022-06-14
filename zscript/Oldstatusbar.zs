@@ -229,7 +229,7 @@ class HDStatusBar:DoomStatusBar{
 				&&!witem.bwimpy_weapon
 			){
 				string wpsp;double wpscl;
-				[wpsp,wpscl]=witem.getpickupsprite();
+				[wpsp,wpscl]=witem.getpickupsprite(true);
 				if(wpsp!=""){
 					int sln=witem.slotnumber*24;
 					for(int i=0;i<wepspriteofs.size();i++){
@@ -1154,8 +1154,6 @@ class HDStatusBar:DoomStatusBar{
 		//if(hh_showstim.getbool()){
 			int of=0;
 			let stims=hpl.CountInv('HDStim');
-			let stimcount = hpl.CountInv('HDStim') / 4;
-			let str = String.Format("%i", stimcount);
 			if(stims){
 				drawimage(
 					"STIMA0",(coords.x,coords.y+0),
@@ -1169,7 +1167,7 @@ class HDStatusBar:DoomStatusBar{
 				let wcol=stims<1? Font.CR_WHITE:Font.CR_GREEN;
 				drawstring(
 					mIndexFont,
-					str,
+					formatnumber(stims,3),
 					coords+(8,1),
 					DI_SCREEN_CENTER_BOTTOM|DI_TEXT_ALIGN_LEFT,
 					wcol
@@ -1182,10 +1180,8 @@ class HDStatusBar:DoomStatusBar{
 		void DrawZerkCount(Vector2 coords){
 		//if(hh_showstim.getbool()){
 			int of=0;
-			let zerk = hpl.CountInv('HDZerk');
-			let zerkcount = (zerk - 10500) / 84;
-			let zstr = String.Format("%i", zerkcount);
-			if(zerk > 10500){
+			let zerk=hpl.CountInv('HDZerk');
+			if(zerk){
 				drawimage(
 					"PPSTA0",(coords.x,coords.y+0),
 					DI_SCREEN_CENTER_BOTTOM|DI_ITEM_LEFT_TOP,
@@ -1198,7 +1194,7 @@ class HDStatusBar:DoomStatusBar{
 				let wcol=zerk<1? Font.CR_WHITE:Font.CR_GREEN;
 				drawstring(
 					mIndexFont,
-					zstr,
+					formatnumber(zerk,3),
 					coords+(8,1),
 					DI_SCREEN_CENTER_BOTTOM|DI_TEXT_ALIGN_LEFT,
 					wcol
