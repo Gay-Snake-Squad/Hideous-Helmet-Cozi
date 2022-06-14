@@ -637,9 +637,9 @@ class HDStatusBar:DoomStatusBar{
 					DTA_VirtualWidth,640,DTA_VirtualHeight,480
 				);*/
 				//Actual Numbers Stuff.
-				//compangle2=hpl.angle % 360;
+				//compangle=hpl.angle % 360;
 
-				string postxt=string.format("%i",compangle2);
+				string postxt=string.format("%i",compangle);
 				screen.DrawText(confont,
 					font.CR_WHITE,
 					320-(NewSmallFont.StringWidth(postxt)>>1),
