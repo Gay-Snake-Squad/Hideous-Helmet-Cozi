@@ -590,12 +590,13 @@ class HDStatusBar:DoomStatusBar{
 			//compass
 			if(helmet||!hh_hidecompass.getbool()){
 				int STB_COMPRAD=12;vector2 compos=(-STB_COMPRAD,STB_COMPRAD)*2;
-				double compangle=hpl.angle;
-
+				//double compangle=hpl.angle; This is Matt's Version [Cozi]
+				double compangle=hpl.angle % 360; //This is mine [Cozi]
 				double compangle2=hpl.deltaangle(0,compangle);
+				
 				if(abs(compangle2)<120)screen.DrawText(NewSmallFont,
 					font.CR_GOLD,
-					320+compangle2*32/cplayer.fov,
+					315+compangle2*32/cplayer.fov,
 					wephelpheight-90,
 					"E",
 					DTA_VirtualWidth,640,DTA_VirtualHeight,480
@@ -603,7 +604,7 @@ class HDStatusBar:DoomStatusBar{
 				compangle2=hpl.deltaangle(-90,compangle);
 				if(abs(compangle2)<120)screen.DrawText(NewSmallFont,
 					font.CR_BLACK,
-					320+compangle2*32/cplayer.fov,
+					315+compangle2*32/cplayer.fov,
 					wephelpheight-90,
 					"S",
 					DTA_VirtualWidth,640,DTA_VirtualHeight,480
@@ -611,7 +612,7 @@ class HDStatusBar:DoomStatusBar{
 				compangle2=hpl.deltaangle(180,compangle);
 				if(abs(compangle2)<120)screen.DrawText(NewSmallFont,
 					font.CR_RED,
-					320+compangle2*32/cplayer.fov, //600+compangle2*32/cplayer.fov,
+					315+compangle2*32/cplayer.fov, //600+compangle2*32/cplayer.fov,
 					wephelpheight-90,
 					"W",
 					DTA_VirtualWidth,640,DTA_VirtualHeight,480
@@ -619,15 +620,13 @@ class HDStatusBar:DoomStatusBar{
 				compangle2=hpl.deltaangle(90,compangle);
 				if(abs(compangle2)<120)screen.DrawText(NewSmallFont,
 					font.CR_WHITE,
-					320+compangle2*32/cplayer.fov,
+					315+compangle2*32/cplayer.fov,
 					wephelpheight-90,
 					"N",
 					DTA_VirtualWidth,640,DTA_VirtualHeight,480
 				);
 				
 				// Angle
-				//double compangle=hpl.angle;
-				//compangle2=clamp(0,360);
 				let whh=wephelpheight+NewSmallFont.GetHeight();
 				//This is the funny point up
 				/*screen.DrawText(NewSmallFont,
@@ -638,18 +637,13 @@ class HDStatusBar:DoomStatusBar{
 					DTA_VirtualWidth,640,DTA_VirtualHeight,480
 				);*/
 				//Actual Numbers Stuff.
-				compangle=hpl.angle;
-				compangle2=hpl.deltaangle(0,compangle);
-				//if(compangle2 < 1)
-				//compangle2*=-1;
-				//else
-				//compangle2 += 180;
+				//compangle2=hpl.angle % 360;
 
 				string postxt=string.format("%i",compangle2);
 				screen.DrawText(confont,
 					font.CR_WHITE,
 					320-(NewSmallFont.StringWidth(postxt)>>1),
-					whh+300,//was 6
+					whh-80,//was 6
 					postxt,
 					DTA_VirtualWidth,640,DTA_VirtualHeight,480
 				);
