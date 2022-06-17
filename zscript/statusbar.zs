@@ -577,9 +577,10 @@ class HDStatusBar:DoomStatusBar{
 			,DI_SCREEN_CENTER_BOTTOM
 		);
 
-		if(helmet)DrawWoundCount((46,-30));
-		if(helmet)DrawDrugCount((46,-22)); // Diz iz mine - [Cozi]
-		if(helmet)DrawZerkCount((46,-14)); // ZERRRRRRRRRK - [Cozi]
+		if(helmet)DrawWoundCount((56,-30));
+		if(helmet)DrawDrugCount((56,-22)); // Diz iz mine - [Cozi]
+		if(helmet)DrawZerkCount((56,-14)); // ZERRRRRRRRRK - [Cozi]
+		//if(helmet)DrawBloodBagCount((56,-14));
 
 		//weapon readouts!
 		if(cplayer.readyweapon&&cplayer.readyweapon!=WP_NOCHANGE)
@@ -1118,23 +1119,23 @@ class HDStatusBar:DoomStatusBar{
 			if(hh_showbleedwhenbleeding.getbool()&&!wounds) return;
 			if(wounds){
 				drawimage(
-					"BLUDC0",(coords.x,coords.y+1),
+					"BLUDC0",(coords.x,coords.y+0),
 					DI_SCREEN_CENTER_BOTTOM|DI_ITEM_LEFT_TOP,
 					0.6,
 					scale:(0.5,0.5)
 				);
 				of=clamp(int(wounds*0.2),1,3);
 				if(hpl.flip)of=-of;
-			}
 			drawrect(coords.x+2,coords.y+of,2,6);
 			drawrect(coords.x,coords.y+2+of,6,2);
+			}
 
-			if(hh_woundcounter.getbool()){
+			if(hh_woundcounter.getbool()&&wounds){
 			let wcol=wounds<1? Font.CR_WHITE:Font.CR_RED;
 				drawstring(
 					mIndexFont,
 					formatnumber(wounds,3),
-					coords+(8,1),
+					coords+(0,1),
 					DI_SCREEN_CENTER_BOTTOM|DI_TEXT_ALIGN_LEFT,
 					wcol
 				);
@@ -1200,6 +1201,34 @@ class HDStatusBar:DoomStatusBar{
 			}
 		}
 	}
+
+		/*void DrawBloodBagCount(Vector2 coords){
+		//if(hh_showstim.getbool()){
+			int of=0;
+			let bloodbag=hpl.CountInv('bloodleft');
+			let bloodbagcount = hpl.CountInv('bloodleft');
+			let str = String.Format("%i", bloodbagcount);
+			if(bloodbag){
+				drawimage(
+					"PBLDA0",(coords.x,coords.y+0),
+					DI_SCREEN_CENTER_BOTTOM|DI_ITEM_LEFT_TOP,
+					0.6,
+					scale:(0.5,0.5)
+				);
+				of=clamp(int(bloodbag*0.2),1,3);
+				if(hpl.flip)of=-of;
+				if(hh_woundcounter.getbool()){
+				let wcol=bloodbag<1? Font.CR_WHITE:Font.CR_GREEN;
+				drawstring(
+					mIndexFont,
+					str,
+					coords+(8,1),
+					DI_SCREEN_CENTER_BOTTOM|DI_TEXT_ALIGN_LEFT,
+					wcol
+				);
+			}
+		}
+	}*/
 
 	void HandleDrawArmour(
 		hdpickup hp,
