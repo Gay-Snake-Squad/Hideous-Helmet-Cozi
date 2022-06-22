@@ -1,2 +1,2 @@
-const HHCONST_HUDHELMET = 72; // Half of Garrison armour's durability
-const ENC_HUDHELMET = 200;
+const HHCONST_HUDHELMET = 35; // Half of blue armour's durability :)) - [Ted]
+const ENC_HUDHELMET = 150; // Bit less than what's originally set.
