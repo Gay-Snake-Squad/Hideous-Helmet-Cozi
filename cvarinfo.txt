@@ -31,3 +31,6 @@ server bool hh_nerfarmour=true;
 server bool hh_enemywearshelmet=true;
 
 server bool hh_debug=false;
+
+//Cozi's Bullshit
+user bool hh_showstim=true;

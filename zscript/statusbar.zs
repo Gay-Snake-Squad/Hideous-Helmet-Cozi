@@ -210,7 +210,7 @@ class HDStatusBar:DoomStatusBar{
 			hh_durabilitytop=cvar.getcvar("hh_durabilitytop", cplayer);
 
 			//Cozi's Modified/Added HUD stuff
-			//drug = cvar.getcvar("hd_debugcounter_drugs", Players[i]).getint();
+			hh_showstim=cvar.getcvar("hh_showstim", cplayer);
 		}
 		super.tick();
 		hpl=hdplayerpawn(cplayer.mo);
@@ -1146,7 +1146,7 @@ class HDStatusBar:DoomStatusBar{
 
 		//Added Stims, change the icon - [Cozi]
 		void DrawDrugCount(Vector2 coords){
-		//if(hh_showstim.getbool()){
+		if(hh_showstim.getbool()){
 			int of=0;
 			let stims=hpl.CountInv('HDStim');
 			let stimcount = hpl.CountInv('HDStim') / 4;
@@ -1171,7 +1171,7 @@ class HDStatusBar:DoomStatusBar{
 				);
 			}
 		}
-	}
+	}}
 
 			//Added Stims, change the icon - [Cozi]
 		void DrawZerkCount(Vector2 coords){
