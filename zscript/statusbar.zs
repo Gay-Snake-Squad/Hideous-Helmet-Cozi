@@ -1202,7 +1202,7 @@ class HDStatusBar:DoomStatusBar{
 				);
 			}
 		}
-	}
+	}}
 
 		/*void DrawBloodBagCount(Vector2 coords){
 		//if(hh_showstim.getbool()){
