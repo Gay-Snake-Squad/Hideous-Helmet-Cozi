@@ -220,7 +220,7 @@ class HHelmetWorn : HDArmourWorn
 
 		sb.DrawBar(
 			helmetSprite, helmetBack,
-			Durability, 72,
+			Durability, 35,
 			coords, -1, sb.SHADER_VERT,
 			gzFlags
 		);
