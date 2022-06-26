@@ -33,6 +33,10 @@ OptionMenu "HHOptions"{
 	Option "Show wound count", "hh_woundcounter", "YesNo", "hh_showbleed"
 	Option "Hide indicator when not bleeding", "hh_showbleedwhenbleeding", "YesNo", "hh_showbleed"
 	StaticText " "
+	StaticText "- Stim Indicator -", "Green"
+	Option "Show stim indicator", "hh_showstim", "YesNo"
+	StaticText "- Zerk Indicator -", "Red"
+	Option "Show zerk indicator", "hh_showzerk", "YesNo"
 
 	StaticText "= DANGER ZONE =", "Red"
 	SafeCommand "Reset general options", "hh_options_reset_general"
