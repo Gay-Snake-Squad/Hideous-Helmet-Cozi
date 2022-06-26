@@ -34,3 +34,4 @@ server bool hh_debug=false;
 
 //Cozi's Bullshit
 user bool hh_showstim=true;
+user bool hh_showzerk=true;

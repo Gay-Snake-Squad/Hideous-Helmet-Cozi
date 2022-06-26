@@ -149,6 +149,7 @@ class HDStatusBar:DoomStatusBar{
 	transient cvar hh_durabilitytop;
 	//Cozi's Bullshit
 	transient cvar hh_showstim;
+	transient cvar hh_showzerk;
 
 	void PushCircleUVCoords(Shape2D circle, vector2 scale = (1, 1)){
 		circle.Clear(Shape2D.C_Coords);
@@ -211,6 +212,7 @@ class HDStatusBar:DoomStatusBar{
 
 			//Cozi's Modified/Added HUD stuff
 			hh_showstim=cvar.getcvar("hh_showstim", cplayer);
+			hh_showzerk=cvar.getcvar("hh_showzerk", cplayer);
 		}
 		super.tick();
 		hpl=hdplayerpawn(cplayer.mo);
@@ -1173,9 +1175,9 @@ class HDStatusBar:DoomStatusBar{
 		}
 	}}
 
-			//Added Stims, change the icon - [Cozi]
+			//Added Zonks, change the icon - [Cozi]
 		void DrawZerkCount(Vector2 coords){
-		//if(hh_showstim.getbool()){
+		if(hh_showzerk.getbool()){
 			int of=0;
 			let zerk = hpl.CountInv('HDZerk');
 			let zerkcount = (zerk - 10500) / 84;
