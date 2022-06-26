@@ -1155,7 +1155,7 @@ class HDStatusBar:DoomStatusBar{
 			let str = String.Format("%i", stimcount);
 			if(stims){
 				drawimage(
-					"SYRGA0",(coords.x,coords.y+0),
+					"HLMSA0",(coords.x,coords.y+0),
 					DI_SCREEN_CENTER_BOTTOM|DI_ITEM_LEFT_TOP,
 					0.6,
 					scale:(0.5,0.5)
@@ -1184,7 +1184,7 @@ class HDStatusBar:DoomStatusBar{
 			let zstr = String.Format("%i", zerkcount);
 			if(zerk > 10500){
 				drawimage(
-					"SYRBA0",(coords.x,coords.y+0),
+					"HLMZA0",(coords.x,coords.y+0),
 					DI_SCREEN_CENTER_BOTTOM|DI_ITEM_LEFT_TOP,
 					0.6,
 					scale:(0.5,0.5)
