@@ -35,8 +35,10 @@ OptionMenu "HHOptions"{
 	StaticText " "
 	StaticText "- Stim Indicator -", "Green"
 	Option "Show stim indicator", "hh_showstim", "YesNo"
+	StaticText " "
 	StaticText "- Zerk Indicator -", "Red"
 	Option "Show zerk indicator", "hh_showzerk", "YesNo"
+	StaticText " "
 
 	StaticText "= DANGER ZONE =", "Red"
 	SafeCommand "Reset general options", "hh_options_reset_general"
