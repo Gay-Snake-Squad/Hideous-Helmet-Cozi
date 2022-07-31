@@ -632,13 +632,13 @@ class HDStatusBar:DoomStatusBar{
 				// Angle
 				let whh=wephelpheight+NewSmallFont.GetHeight();
 				//This is the funny point up
-				/*screen.DrawText(NewSmallFont,
+				screen.DrawText(NewSmallFont,
 					font.CR_OLIVE,
-					320,
-					whh,
+					315,
+					wephelpheight-75,
 					"^",
 					DTA_VirtualWidth,640,DTA_VirtualHeight,480
-				);*/
+				);
 				//Actual Numbers Stuff.
 				//compangle=hpl.angle % 360;
 
