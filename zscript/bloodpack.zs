@@ -39,14 +39,30 @@ class SecondBloodSticker:HDWoundFixer{
 	;}
 	states{
 	spawn:
-		PBLD A 0;
+		PBLD A 1;
+		PBLD A 0{
+			let a=spawn("SecondBlood",pos);
+			a.vel=vel;
+			a.target=target;
+		}
 		stop;
 	select:
 		TNT1 A 10{
-			if(getcvar("hd_helptext"))
+			if(DoHelpText())
 			A_WeaponMessage("\cr::: \cgSECOND BLOOD \cr:::\c-\n\n\nPress and hold Fire\nto attach.",175);
+				let iii=SecondBlood(findinventory("SecondBlood"));
+			if(!!iii){
+				iii.mags.delete(0);
+				iii.amount--;
+			}
 		}
 		goto super::select;
+	deselect:
+		TNT1 A 6;
+		TNT1 A 0{
+			HDF.Give(self,"SecondBlood",1);
+			A_Lower(999);
+		}goto super::deselect;
 	altreload:
 	unload:
 		TNT1 A 0 A_StartSound("weapons/pocket",CHAN_BODY);
@@ -60,18 +76,10 @@ class SecondBloodSticker:HDWoundFixer{
 		TNT1 A 0 A_Refire();
 		goto readyend;
 	ready:
-		TNT1 A 0{
-			if(!countinv("SecondBlood")){
-				A_SelectWeapon("HDFist");
-				setweaponstate("deselect");
-				invoker.goawayanddie();
-			}
-		}
 		TNT1 A 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_ALLOWUSER1|WRF_ALLOWUSER3|WRF_ALLOWUSER4);
 		goto readyend;
 	fire:
 	altfire:
-		TNT1 A 0 A_JumpIf(!countinv("SecondBlood"),"nope");
 		TNT1 A 10 A_StartSound("bloodpack/open",CHAN_WEAPON);
 		TNT1 AAA 8 A_StartSound("bloodpack/shake",CHAN_WEAPON,CHANF_OVERLAP);
 		TNT1 A 4;
@@ -103,7 +111,7 @@ class SecondBloodSticker:HDWoundFixer{
 					||tracbak!=blt.hitactor
 					||!hdplayerpawn(tracbak)
 				){
-					A_WeaponMessage("No valid patient in range.");
+					if(!hdplayerpawn(blt.hitactor))A_WeaponMessage("No valid patient in range.");
 					invoker.weaponstatus[SBS_INJECTCOUNTER]=0;
 					return;
 				}
@@ -122,33 +130,17 @@ class SecondBloodSticker:HDWoundFixer{
 			}
 			let blockinv=HDWoundFixer.CheckCovered(patient,false);
 			if(blockinv){
-				if(
-					bt&BT_ATTACK
-					&&getcvar("hd_autostrip")
-				){
-					setweaponstate("reload");
-				}else{
-					A_WeaponMessage("Remove "..((bt&BT_ALTATTACK)?"their":"your").." "..blockinv.gettag().." first.");
-					invoker.weaponstatus[SBS_INJECTCOUNTER]=0;
-				}
-				return;
-			}
-			if(
-				!countinv("SecondBlood")
-			){
-				A_WeaponMessage("Where did the blood pack go?");
+				A_WeaponMessage("Remove "..((bt&BT_ALTATTACK)?"their":"your").." "..blockinv.gettag().." first.");
 				invoker.weaponstatus[SBS_INJECTCOUNTER]=0;
 				return;
 			}
 			if(invoker.weaponstatus[SBS_INJECTCOUNTER]>30){
-				A_TakeInjector("SecondBlood");
 				patient.A_GiveInventory("BloodBagWorn");
 				A_StartSound("bloodpack/inject",CHAN_WEAPON,CHANF_OVERLAP);
 				A_SetBlend("7a 3a 18",0.1,4);
 				A_MuzzleClimb(0,2);
-				hdweaponselector.select(self,"HDFist");
-				setweaponstate("nope");
-				invoker.goawayanddie();
+				A_FistNope();
+				invoker.destroy();
 			}
 		}
 		TNT1 A 0 A_Refire();
