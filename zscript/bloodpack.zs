@@ -28,15 +28,17 @@ class SecondBloodSticker:HDWoundFixer{
 		+weapon.wimpy_weapon
 		weapon.selectionorder 1012;
 	}
-	override inventory CreateTossable(int amt){
-		HDWoundFixer.DropMeds(owner,0);
-		return null;
-	}
 	override string gethelptext(){
 		return "\cuSynthetic Blood\n"
 		..WEPHELP_FIRE.."  Attach"
 		..(owner.countinv("BloodBagWorn")?"\n"..WEPHELP_ALTRELOAD.."  Remove":"")
 	;}
+	override void DrawHUDStuff(HDStatusBar sb,HDWeapon hdw,HDPlayerPawn hpl){
+		sb.drawimage(
+			"PBLDA0",(-23,-7),
+			sb.DI_SCREEN_CENTER_BOTTOM|sb.DI_ITEM_RIGHT
+		);
+	}
 	states{
 	spawn:
 		PBLD A 1;
@@ -49,7 +51,7 @@ class SecondBloodSticker:HDWoundFixer{
 	select:
 		TNT1 A 10{
 			if(DoHelpText())
-			A_WeaponMessage("\cr::: \cgSECOND BLOOD \cr:::\c-\n\n\nPress and hold Fire\nto attach.",175);
+			A_TakeOffFirst(blockinv.gettag());
 				let iii=SecondBlood(findinventory("SecondBlood"));
 			if(!!iii){
 				iii.mags.delete(0);
