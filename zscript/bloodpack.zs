@@ -133,7 +133,7 @@ class SecondBloodSticker:HDWoundFixer{
 			}
 			let blockinv=HDWoundFixer.CheckCovered(patient,false);
 			if(blockinv){
-				A_WeaponMessage("Remove "..((bt&BT_ALTATTACK)?"their":"your").." "..blockinv.gettag().." first.");
+				A_TakeOffFirst(blockinv.gettag());
 				invoker.weaponstatus[SBS_INJECTCOUNTER]=0;
 				return;
 			}
@@ -209,7 +209,7 @@ class BloodBagWorn:HDPickup{
 		)hp.dropinventory(self);
 	}
 
-		override void DrawHudStuff(
+	override void DrawHudStuff(
 		hdstatusbar sb,
 		hdplayerpawn hpl,
 		int hdflags,
@@ -218,13 +218,13 @@ class BloodBagWorn:HDPickup{
 		bool am=hdflags&HDSB_AUTOMAP;
 		sb.drawimage(
 			"PBLDA0",
-			am?(8,134):(88,-10),// add 20
+			am?(8,134):(88,-10),
 			am?sb.DI_TOPLEFT:(sb.DI_SCREEN_CENTER_BOTTOM|sb.DI_ITEM_CENTER_BOTTOM),
-			scale:(0.5,0.5)
+			scale:(0.6,0.6)
 		);
 		sb.drawstring(
 			sb.pnewsmallfont,sb.formatnumber(bloodleft),
-			am?(14,136):(92,-10), //lets try 0 instead of 72
+			am?(14,136):(92,-10),
 			am?(sb.DI_TOPLEFT|sb.DI_TEXT_ALIGN_RIGHT)
 			:(sb.DI_SCREEN_CENTER_BOTTOM|sb.DI_TEXT_ALIGN_RIGHT),
 			Font.CR_RED,scale:(0.5,0.5)
