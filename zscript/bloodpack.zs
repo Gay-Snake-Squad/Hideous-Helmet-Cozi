@@ -50,6 +50,7 @@ class SecondBloodSticker:HDWoundFixer{
 		stop;
 	select:
 		TNT1 A 10{
+			let blockinv=HDWoundFixer.CheckCovered(patient,false);
 			if(DoHelpText())
 			A_TakeOffFirst(blockinv.gettag());
 				let iii=SecondBlood(findinventory("SecondBlood"));
