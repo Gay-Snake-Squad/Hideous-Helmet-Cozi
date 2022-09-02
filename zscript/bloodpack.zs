@@ -50,10 +50,10 @@ class SecondBloodSticker:HDWoundFixer{
 		stop;
 	select:
 		TNT1 A 10{
-			let blockinv=HDWoundFixer.CheckCovered(patient,false);
 			if(DoHelpText())
-			A_TakeOffFirst(blockinv.gettag());
-				let iii=SecondBlood(findinventory("SecondBlood"));
+			A_WeaponMessage("\cr::: \cgSECOND BLOOD \cr:::\c-\n\n\nPress and hold Fire\nto attach.",175);
+
+			let iii=SecondBlood(findinventory("SecondBlood"));
 			if(!!iii){
 				iii.mags.delete(0);
 				iii.amount--;
